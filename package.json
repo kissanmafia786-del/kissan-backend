@@ -1,0 +1,32 @@
+{
+  "name": "kissan-backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "license": "ISC",
+  "scripts": {
+    "start": "fuser -k 4000/tcp || true && node server.js"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.21",
+    "axios": "^1.12.2",
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "express-rate-limit": "^8.1.0",
+    "express-validator": "^7.2.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.8.7",
+    "morgan": "^1.10.1",
+    "nodemailer": "^7.0.6",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.13"
+  },
+  "description": "This is a starter backend for the Kissan earning app.",
+  "keywords": [],
+  "author": "",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
