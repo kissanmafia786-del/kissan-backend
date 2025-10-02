@@ -1,10 +1,42 @@
 const express = require("express");
 const router = express.Router();
-const Ad = require("../models/Ad");
+const mongoose = require("mongoose");
 
-router.get("/", async (req, res) => res.json(await Ad.find()));
-router.post("/", async (req, res) => res.json(await new Ad(req.body).save()));
-router.put("/:id", async (req, res) => res.json(await Ad.findByIdAndUpdate(req.params.id, req.body, { new: true })));
-router.delete("/:id", async (req, res) => { await Ad.findByIdAndDelete(req.params.id); res.json({ message: "Deleted" }) });
+// Ads Schema
+const AdSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  image: String,
+  createdAt: { type: Date, default: Date.now },
+});
+
+const Ad = mongoose.models.Ad || mongoose.model("Ad", AdSchema);
+
+// GET ads with pagination
+router.get("/", async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = 5; // ek page pe 5 ads
+    const skip = (page - 1) * limit;
+
+    const ads = await Ad.find().sort({ createdAt: -1 }).skip(skip).limit(limit);
+    res.json(ads);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch ads" });
+  }
+});
+
+// POST new ad (admin only)
+router.post("/", async (req, res) => {
+  try {
+    const { title, description, image } = req.body;
+    const ad = new Ad({ title, description, image });
+    await ad.save();
+    res.json(ad);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to create ad" });
+  }
+});
 
 module.exports = router;
+

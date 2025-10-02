@@ -15,9 +15,9 @@ const userSchema = new Schema({
   createdAt: { type: Date, default: Date.now }
 });
 const User = mongoose.model('User', userSchema);
-
+const User = require(".User");                              
 const transactionSchema = new Schema({
-  userId: { type: Schema.Types.ObjectId, ref: 'User' },
+ userId: { type: Schema.Types.ObjectId, ref: 'User' },
   type: String, // credit/debit
   source: String, // ad/task/withdraw/admin
   amount: Number,

@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
-
+const adRoutes = require("./routes/ads");
 // env setup
 dotenv.config();
 
@@ -33,7 +33,7 @@ app.use("/api/tasks", taskRoutes);
 app.use("/api/ads", adsRoutes);
 app.use("/api/wallet", walletRoutes);
 app.use("/api/admin", adminRoutes);
-
+app.user("/api/ads", adRoutes);
 // 🔹 Root Test Route
 app.get("/", (req, res) => {
   res.send("🚀 Server is running | Powered by Kissan Software");
