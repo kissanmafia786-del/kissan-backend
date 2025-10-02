@@ -4,6 +4,11 @@
   "main": "server.js",
   "license": "ISC",
   "scripts": {
+  "start": "node server.js",
+  "dev": "nodemon server.js",
+  "lint": "eslint ."
+}
+
     "start": "fuser -k 4000/tcp || true && node server.js"
   },
   "dependencies": {
